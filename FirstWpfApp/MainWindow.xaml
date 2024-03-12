@@ -1,0 +1,94 @@
+﻿<Window x:Class="ClickMe.MainWindow" Loaded="MainWindow_Loaded"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClickMe"
+        Icon="/Resources/logo_green-red.png"
+        mc:Ignorable="d"
+        Title="Simple App" Height="201" Width="684" x:Name="mainWindow" Background="#FFA99595" >
+    <Window.Resources>
+        <Style TargetType="Button" x:Key="BaseButtonStyle">
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="8">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#6f868e" />
+                                <Setter Property="FontWeight" Value="Bold" />
+                                <Setter Property="Foreground" Value="#FFE4D6" />
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="Black" Direction="320" ShadowDepth="10" BlurRadius="10" Opacity="0.8"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="Black" Direction="320" ShadowDepth="5" BlurRadius="5" Opacity="0.5"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="Button" x:Key="GreenButtonStyle" BasedOn="{StaticResource BaseButtonStyle}">
+            <Setter Property="Background" Value="#89b0ae" />
+            <Setter Property="BorderBrush" Value="#b5838d" />
+            <Setter Property="FontFamily" Value="WinCC_flexible" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <Style TargetType="Button" x:Key="RedButtonStyle" BasedOn="{StaticResource BaseButtonStyle}">
+            <Setter Property="Background" Value="#b5838d"/>
+            <Setter Property="BorderBrush" Value="#6f868e" />
+            <Setter Property="FontFamily" Value="WinCC_flexible" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="0,10,0,-6">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid RenderTransformOrigin="0.5,0.5" Margin="0,0,600,49" Grid.RowSpan="2">
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.102"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Grid.RenderTransform>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="0*"/>
+                <ColumnDefinition Width="0*"/>
+            </Grid.ColumnDefinitions>
+            <Image Source="/Resources/logo_simple.png" x:Name="logoImage" Cursor="Hand" Grid.ColumnSpan="5" Margin="32,9,-63,-8" RenderTransformOrigin="0.5,0.5" MouseLeftButtonDown="LogoImage_MouseLeftButtonDown">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-0.737"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+        </Grid>
+        <TextBlock Text="This is my first WPF App" HorizontalAlignment="Center" Margin="0,20,0,0" FontSize="20" Grid.Row="0" Grid.Column="2" Foreground="#FFFFE4D6" FontFamily="WinCC_flexible" FontWeight="Bold" />
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
+            <Button Content="Minimize" Click="MinimizeButtonClickEvent" Width="100" Height="50" Cursor="Hand" HorizontalAlignment="Center" Margin="0,20,0,0" Grid.Row="1" Grid.Column="0" Style="{StaticResource GreenButtonStyle}" />
+            <Button Content="Exit" Click="CloseButtonClickEvent" Width="100" Height="50" Cursor="Hand" Margin="50,20,0,0" Grid.Row="1" Grid.Column="1" Style="{StaticResource RedButtonStyle}" />
+        </StackPanel>
+    </Grid>
+</Window>
