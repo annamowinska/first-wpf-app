@@ -18,7 +18,7 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="Background" Value="#6f868e" />
+                                <Setter TargetName="border" Property="Background" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}"/>
                                 <Setter Property="FontWeight" Value="Bold" />
                                 <Setter Property="Foreground" Value="#FFE4D6" />
                                 <Setter Property="Effect">
@@ -43,6 +43,7 @@
             <Setter Property="FontFamily" Value="WinCC_flexible" />
             <Setter Property="FontSize" Value="14" />
             <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Tag" Value="#6f868e" />
         </Style>
         <Style TargetType="Button" x:Key="RedButtonStyle" BasedOn="{StaticResource BaseButtonStyle}">
             <Setter Property="Background" Value="#b5838d"/>
@@ -50,20 +51,7 @@
             <Setter Property="FontFamily" Value="WinCC_flexible" />
             <Setter Property="FontSize" Value="14" />
             <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="8">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="Background" Value="#8c4f57"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+            <Setter Property="Tag" Value="#8c4f57" />
         </Style>
     </Window.Resources>
 
