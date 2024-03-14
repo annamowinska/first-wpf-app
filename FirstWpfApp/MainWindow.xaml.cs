@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using FirstWpfApp.ViewModel;
 
 namespace FirstWpfApp
@@ -8,6 +9,11 @@ namespace FirstWpfApp
         public MainWindow()
         {
             DataContext = new MainViewModel();
+        }
+
+        internal static Action Exit(object v)
+        {
+            throw new NotImplementedException();
         }
     }
 }

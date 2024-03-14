@@ -13,16 +13,9 @@ namespace FirstWpfApp.ViewModel
 {
     public class MainViewModel : ObservableObject
     {
-        public ICommand ExitCommand { get; }
-        public ICommand MinimizeCommand { get; }
-        public ICommand OpenUrlCommand { get; }
-
-        public MainViewModel()
-        {
-            ExitCommand = new RelayCommand(Exit);
-            MinimizeCommand = new RelayCommand(Minimize);
-            OpenUrlCommand = new RelayCommand(OpenUrl);
-        }
+        public RelayCommand ExitCommand => new RelayCommand(Exit);
+        public RelayCommand MinimizeCommand => new RelayCommand(Minimize);
+        public RelayCommand OpenUrlCommand => new RelayCommand(OpenUrl);
 
         private void Exit()
         {
