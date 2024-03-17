@@ -3,10 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FirstWpfApp.ViewModel"
+        xmlns:firstWpfApp="clr-namespace:FirstWpfApp"
         Icon="/Resources/logo_green-red.png"
         mc:Ignorable="d"
-        Title="Simple App" Height="201" Width="684" x:Name="mainWindow" Background="#FFA99595" >
+        Title="Simple App" Height="308" Width="684" x:Name="mainWindow">
+
     <Window.Resources>
+        <firstWpfApp:BackgroundColorConverter x:Key="BackgroundColorConverter" />
         <Style TargetType="Button" x:Key="BaseButtonStyle">
             <Setter Property="BorderThickness" Value="2" />
             <Setter Property="Template">
@@ -19,7 +23,7 @@
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="border" Property="Background" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Tag}"/>
                                 <Setter Property="FontWeight" Value="Bold" />
-                                <Setter Property="Foreground" Value="#FFE4D6" />
+                                <Setter Property="Foreground" Value="#FFE4D6"/>
                                 <Setter Property="Effect">
                                     <Setter.Value>
                                         <DropShadowEffect Color="Black" Direction="320" ShadowDepth="10" BlurRadius="10" Opacity="0.8"/>
@@ -36,6 +40,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
         <Style TargetType="Button" x:Key="GreenButtonStyle" BasedOn="{StaticResource BaseButtonStyle}">
             <Setter Property="Background" Value="#89b0ae" />
             <Setter Property="BorderBrush" Value="#b5838d" />
@@ -54,12 +59,25 @@
         </Style>
     </Window.Resources>
 
-    <Grid Margin="0,10,0,-6">
+    <Window.Background>
+        <MultiBinding Converter="{StaticResource BackgroundColorConverter}">
+            <Binding Path="Background.Color" ElementName="mainWindow" />
+            <Binding Path="IsChecked" ElementName="LightBackground" />
+        </MultiBinding>
+    </Window.Background>
+
+    <Grid Margin="0,10,0,14" RenderTransformOrigin="0.499,0.452">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="177*"/>
+            <ColumnDefinition Width="224*"/>
+            <ColumnDefinition Width="107*"/>
+            <ColumnDefinition Width="177*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" MinHeight="110.803" />
+            <RowDefinition Height="Auto" MinHeight="288.197" />
         </Grid.RowDefinitions>
-        <Grid RenderTransformOrigin="0.5,0.5" Margin="0,0,600,49" Grid.RowSpan="2">
+        <Grid RenderTransformOrigin="0.5,0.5" Margin="0,0,52,-54" Grid.RowSpan="2">
             <Grid.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -68,14 +86,7 @@
                     <TranslateTransform/>
                 </TransformGroup>
             </Grid.RenderTransform>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="0*"/>
-                <ColumnDefinition Width="0*"/>
-            </Grid.ColumnDefinitions>
-            <Image Source="/Resources/logo_simple.png" x:Name="LogoImage" Cursor="Hand" Grid.ColumnSpan="5" Margin="32,9,-63,-8" RenderTransformOrigin="0.5,0.5">
+            <Image Source="/Resources/logo_simple.png" x:Name="LogoImage" Cursor="Hand" Margin="28,3,-8,307" RenderTransformOrigin="0.5,0.5">
                 <Image.InputBindings>
                     <MouseBinding Gesture="LeftClick" Command="{Binding OpenUrlCommand}"/>
                 </Image.InputBindings>
@@ -98,10 +109,16 @@
                 </Image.RenderTransform>
             </Image>
         </Grid>
-        <TextBlock Text="This is my first WPF App" HorizontalAlignment="Center" Margin="0,20,0,0" FontSize="20" Grid.Row="0" Grid.Column="2" Foreground="#FFFFE4D6" FontFamily="WinCC_flexible" FontWeight="Bold" />
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
+        <TextBlock Text="This is my first WPF App" HorizontalAlignment="Center" Margin="0,28,0,57" FontSize="20" Grid.Row="0" Foreground="#2a3b2b" FontFamily="WinCC_flexible" FontWeight="Bold" Width="306" Grid.Column="1" Grid.ColumnSpan="2" />
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,59,0,248" Width="250" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2">
             <Button Content="Minimize" Command="{Binding MinimizeCommand}" Width="100" Height="50" Cursor="Hand" HorizontalAlignment="Center" Margin="0,20,0,0" Grid.Row="1" Grid.Column="0" Style="{StaticResource GreenButtonStyle}" />
             <Button Content="Exit" Command="{Binding ExitCommand}"  Width="100" Height="50" Cursor="Hand" Margin="50,20,0,0" Grid.Row="1" Grid.Column="1" Style="{StaticResource RedButtonStyle}" />
         </StackPanel>
+        <TextBlock Text="Do you like this App?" Margin="31,89,164,177" Grid.Row="1" FontSize="15" Foreground="#2a3b2b" FontFamily="WinCC_flexible" FontWeight="Bold" Grid.ColumnSpan="2"/>
+        <StackPanel Orientation="Vertical" Margin="62,73,62,168" Grid.Row="1" Grid.Column="1">
+            <RadioButton x:Name="YesRadioButton" Margin="0,0,0,15"  Width="59" Command="{Binding YesCommand}" Content="Yes" FontSize="18" Foreground="#8c4f57" FontFamily="WinCC_flexible" FontWeight="Bold"/>
+            <RadioButton x:Name="NoRadioButton" Width="59" Command="{Binding NoCommand}" Content="No" FontSize="18" Foreground="#2a3b2b" FontFamily="WinCC_flexible" FontWeight="Bold"/>
+        </StackPanel>
+        <CheckBox x:Name="LightBackground" Content="Light background" Grid.Column="2" Margin="43,89,62,179" FontSize="15" Foreground="#8c4f57" FontFamily="WinCC_flexible" FontWeight="Bold" Grid.Row="1" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>
