@@ -4,13 +4,28 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FirstWpfApp.ViewModel"
+        xmlns:vm ="clr-namespace:FirstWpfApp.ViewModel"
         xmlns:firstWpfApp="clr-namespace:FirstWpfApp"
         Icon="/Resources/logo_green-red.png"
         mc:Ignorable="d"
         Title="Simple App" Height="308" Width="684" x:Name="mainWindow">
-
+    <Window.DataContext>
+        <vm:MainViewModel/>
+    </Window.DataContext>
     <Window.Resources>
         <firstWpfApp:BackgroundColorConverter x:Key="BackgroundColorConverter" />
+        <firstWpfApp:StopAnimationConverter x:Key="StopAnimationConverter" />
+        
+        <Storyboard x:Key="LogoAnimation">
+            <DoubleAnimation
+                Storyboard.TargetName="LogoRotateTransform"
+                Storyboard.TargetProperty="Angle"
+                From="0"
+                To="360"
+                Duration="0:0:5"
+                RepeatBehavior="Forever" />
+        </Storyboard>
+       
         <Style TargetType="Button" x:Key="BaseButtonStyle">
             <Setter Property="BorderThickness" Value="2" />
             <Setter Property="Template">
@@ -49,6 +64,7 @@
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="Tag" Value="#6f868e" />
         </Style>
+
         <Style TargetType="Button" x:Key="RedButtonStyle" BasedOn="{StaticResource BaseButtonStyle}">
             <Setter Property="Background" Value="#b5838d"/>
             <Setter Property="BorderBrush" Value="#6f868e" />
@@ -86,29 +102,21 @@
                     <TranslateTransform/>
                 </TransformGroup>
             </Grid.RenderTransform>
-            <Image Source="/Resources/logo_simple.png" x:Name="LogoImage" Cursor="Hand" Margin="28,3,-8,307" RenderTransformOrigin="0.5,0.5">
+            <Image Source="/Resources/logo_simple.png" x:Name="LogoImage" Cursor="Hand" Margin="28,3,-13,307" RenderTransformOrigin="0.5,0.5" Loaded="LogoImage_Loaded">
                 <Image.InputBindings>
                     <MouseBinding Gesture="LeftClick" Command="{Binding OpenUrlCommand}"/>
                 </Image.InputBindings>
-                <Image.Triggers>
-                    <EventTrigger RoutedEvent="Loaded">
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation
-                                    Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
-                                    From="0"
-                                    To="360"
-                                    Duration="0:0:5"
-                                    RepeatBehavior="Forever" />
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </EventTrigger>
-                </Image.Triggers>
                 <Image.RenderTransform>
-                    <RotateTransform/>
+                    <RotateTransform x:Name="LogoRotateTransform"/>
                 </Image.RenderTransform>
             </Image>
+            <CheckBox x:Name="StopAnimationCheckbox" Content="Stop animation" Margin="13,135,-72,300" FontSize="15" Foreground="#8c4f57" FontFamily="WinCC_flexible" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" IsEnabled="True">
+                <CheckBox.IsChecked>
+                    <Binding Path="IsChecked" ElementName="StopAnimationCheckbox"/>
+                </CheckBox.IsChecked>
+            </CheckBox>
         </Grid>
+
         <TextBlock Text="This is my first WPF App" HorizontalAlignment="Center" Margin="0,28,0,57" FontSize="20" Grid.Row="0" Foreground="#2a3b2b" FontFamily="WinCC_flexible" FontWeight="Bold" Width="306" Grid.Column="1" Grid.ColumnSpan="2" />
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,59,0,248" Width="250" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2">
             <Button Content="Minimize" Command="{Binding MinimizeCommand}" Width="100" Height="50" Cursor="Hand" HorizontalAlignment="Center" Margin="0,20,0,0" Grid.Row="1" Grid.Column="0" Style="{StaticResource GreenButtonStyle}" />

@@ -6,8 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
+using System.ComponentModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.Windows.Media.Animation;
 
 namespace FirstWpfApp.ViewModel
 {
@@ -43,6 +45,5 @@ namespace FirstWpfApp.ViewModel
         {
             MessageBox.Show("Give me a feedback: anna.mowinska@corsol.de");
         }
-
     }
 }
