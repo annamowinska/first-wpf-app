@@ -12,11 +12,11 @@ namespace FirstWpfApp
         {
             if (value is bool isChecked && isChecked)
             {
-                return Visibility.Visible;
+                return Visibility.Collapsed;
             }
             else
             {
-                return Visibility.Collapsed;
+                return Visibility.Visible;
             }
         }
 

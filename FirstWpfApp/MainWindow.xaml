@@ -96,14 +96,6 @@
             <RowDefinition Height="Auto" MinHeight="288.197" />
         </Grid.RowDefinitions>
         <Grid RenderTransformOrigin="0.5,0.5" Margin="0,0,52,-54" Grid.RowSpan="2">
-            <!--<Grid.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="0.102"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Grid.RenderTransform>-->
             <Image Source="/Resources/logo_simple.png" x:Name="LogoImage" Cursor="Hand" Margin="28,3,-13,307" RenderTransformOrigin="0.5,0.5" Loaded="LogoImage_Loaded" Visibility="{Binding StopAnimation, Converter={StaticResource StopAnimationConverter}}">
                 <Image.InputBindings>
                     <MouseBinding Gesture="LeftClick" Command="{Binding OpenUrlCommand}"/>
@@ -112,7 +104,7 @@
                     <RotateTransform x:Name="LogoRotateTransform"/>
                 </Image.RenderTransform>
             </Image>
-            <CheckBox x:Name="StopAnimationCheckbox" Content="Stop animation" Margin="13,135,-72,300" FontSize="15" Foreground="#8c4f57" FontFamily="WinCC_flexible" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" IsEnabled="True">
+            <CheckBox x:Name="StopAnimationCheckbox" Content="Turn off logo" Margin="13,135,-72,299" FontSize="15" Foreground="#8c4f57" FontFamily="WinCC_flexible" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" IsEnabled="True">
                 <CheckBox.IsChecked>
                     <Binding Path="StopAnimation" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
                 </CheckBox.IsChecked>
