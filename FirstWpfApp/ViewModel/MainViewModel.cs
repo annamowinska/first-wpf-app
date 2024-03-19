@@ -21,6 +21,16 @@ namespace FirstWpfApp.ViewModel
         public RelayCommand YesCommand => new RelayCommand(ShowThanks);
         public RelayCommand NoCommand => new RelayCommand(ShowFeedback);
 
+
+        public bool StopAnimation { get { return m_StopAnimation; } set { SetProperty(ref m_StopAnimation, value); } }
+        private bool m_StopAnimation;
+
+
+        public MainViewModel()
+        {
+            StopAnimation = true;
+        }
+
         private void Exit()
         {
             Environment.Exit(0);

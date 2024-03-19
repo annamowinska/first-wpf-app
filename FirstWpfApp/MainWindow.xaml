@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:FirstWpfApp.ViewModel"
         xmlns:vm ="clr-namespace:FirstWpfApp.ViewModel"
         xmlns:firstWpfApp="clr-namespace:FirstWpfApp"
+        xmlns:ib="http://schemas.microsoft.com/xaml/behaviors"
         Icon="/Resources/logo_green-red.png"
         mc:Ignorable="d"
         Title="Simple App" Height="308" Width="684" x:Name="mainWindow">
@@ -15,7 +16,6 @@
     <Window.Resources>
         <firstWpfApp:BackgroundColorConverter x:Key="BackgroundColorConverter" />
         <firstWpfApp:StopAnimationConverter x:Key="StopAnimationConverter" />
-        
         <Storyboard x:Key="LogoAnimation">
             <DoubleAnimation
                 Storyboard.TargetName="LogoRotateTransform"
@@ -23,7 +23,9 @@
                 From="0"
                 To="360"
                 Duration="0:0:5"
-                RepeatBehavior="Forever" />
+                RepeatBehavior="Forever"
+                Completed="DoubleAnimation_Completed"
+                />
         </Storyboard>
        
         <Style TargetType="Button" x:Key="BaseButtonStyle">
@@ -94,15 +96,15 @@
             <RowDefinition Height="Auto" MinHeight="288.197" />
         </Grid.RowDefinitions>
         <Grid RenderTransformOrigin="0.5,0.5" Margin="0,0,52,-54" Grid.RowSpan="2">
-            <Grid.RenderTransform>
+            <!--<Grid.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
                     <RotateTransform Angle="0.102"/>
                     <TranslateTransform/>
                 </TransformGroup>
-            </Grid.RenderTransform>
-            <Image Source="/Resources/logo_simple.png" x:Name="LogoImage" Cursor="Hand" Margin="28,3,-13,307" RenderTransformOrigin="0.5,0.5" Loaded="LogoImage_Loaded">
+            </Grid.RenderTransform>-->
+            <Image Source="/Resources/logo_simple.png" x:Name="LogoImage" Cursor="Hand" Margin="28,3,-13,307" RenderTransformOrigin="0.5,0.5" Loaded="LogoImage_Loaded" Visibility="{Binding StopAnimation, Converter={StaticResource StopAnimationConverter}}">
                 <Image.InputBindings>
                     <MouseBinding Gesture="LeftClick" Command="{Binding OpenUrlCommand}"/>
                 </Image.InputBindings>
@@ -112,7 +114,7 @@
             </Image>
             <CheckBox x:Name="StopAnimationCheckbox" Content="Stop animation" Margin="13,135,-72,300" FontSize="15" Foreground="#8c4f57" FontFamily="WinCC_flexible" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" IsEnabled="True">
                 <CheckBox.IsChecked>
-                    <Binding Path="IsChecked" ElementName="StopAnimationCheckbox"/>
+                    <Binding Path="StopAnimation" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged"/>
                 </CheckBox.IsChecked>
             </CheckBox>
         </Grid>

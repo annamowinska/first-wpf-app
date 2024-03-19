@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media.Animation;
 
@@ -11,11 +12,11 @@ namespace FirstWpfApp
         {
             if (value is bool isChecked && isChecked)
             {
-                return false;
+                return Visibility.Visible;
             }
             else
             {
-                return true;
+                return Visibility.Collapsed;
             }
         }
 
