@@ -12,7 +12,7 @@ using CommunityToolkit.Mvvm.Input;
 using System.Windows.Media.Animation;
 
 namespace FirstWpfApp.ViewModel
-{
+{ 
     public class MainViewModel : ObservableObject
     {
         public RelayCommand ExitCommand => new RelayCommand(Exit);
