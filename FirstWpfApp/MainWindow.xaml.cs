@@ -18,7 +18,7 @@ namespace FirstWpfApp
         {
             throw new NotImplementedException();
         }
-
+         
         private void LogoImage_Loaded(object sender, RoutedEventArgs e)
         {
             m_Storyboard = FindResource("LogoAnimation") as Storyboard;
